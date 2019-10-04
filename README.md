@@ -1,1 +1,1 @@
-# bim213-public
+# Repository of sample codes and implementions for BIM213
