@@ -1,1 +1,2 @@
-# Repository of sample codes and implementions for BIM213
+# BIM213 Data Structures and Algorithms
+Repository of sample codes and implementions for various data structures and algorithms.
