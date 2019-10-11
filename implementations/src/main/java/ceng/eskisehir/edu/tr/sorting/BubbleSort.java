@@ -3,7 +3,7 @@ package ceng.eskisehir.edu.tr.sorting;
 /**
  * Stable = YES
  * In place = YES
- * Running time = O(N2)
+ * Running time = O(N^2)
  */
 
 public class BubbleSort implements Sorting {
