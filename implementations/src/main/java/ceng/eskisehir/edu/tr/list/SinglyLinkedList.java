@@ -13,6 +13,10 @@ public class SinglyLinkedList<T> {
         numberOfNodes = 0;
     }
 
+    public boolean isEmpty() {
+        return (head == null);
+    }
+
     public void add(T value) {
         OneWayNode<T> temp = new OneWayNode<>(value);
 
@@ -26,6 +30,43 @@ public class SinglyLinkedList<T> {
         }
 
         numberOfNodes ++;
+    }
+
+    public void add(int position, T value) {
+        if (position < 0 || numberOfNodes < position) throw new IndexOutOfBoundsException();
+
+        OneWayNode<T> temp = new OneWayNode<>(value);
+
+        if (position == 0) {
+            if (isEmpty()) {
+                head = temp;
+                tail = temp;
+            }
+            else {
+                temp.setNext(head);
+                head = temp;
+            }
+        }
+        else if (position == numberOfNodes) {
+            tail.setNext(temp);
+            tail = temp;
+        }
+        else {
+            OneWayNode<T> current = head, previous = null;
+
+            int i = 0;
+            while (i < position) {
+                previous = current;
+                current = current.getNext();
+
+                i ++;
+            }
+
+            previous.setNext(temp);
+            temp.setNext(current);
+        }
+
+        numberOfNodes += 1;
     }
 
     public int indexOf(T value) {
@@ -42,10 +83,6 @@ public class SinglyLinkedList<T> {
         return -1;
     }
 
-    public boolean isEmpty() {
-        return (head == null);
-    }
-
     public T first() {
         return isEmpty() ? null : head.getData();
     }
@@ -55,9 +92,7 @@ public class SinglyLinkedList<T> {
     }
 
     public T get(int position) {
-        if (position < 0 || numberOfNodes <= position) {
-            return null;
-        }
+        if (position < 0 || numberOfNodes <= position) throw new IndexOutOfBoundsException();
 
         int i = 0;
         OneWayNode<T> temp = head;
