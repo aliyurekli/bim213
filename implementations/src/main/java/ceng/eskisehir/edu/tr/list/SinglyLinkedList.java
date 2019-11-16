@@ -69,6 +69,77 @@ public class SinglyLinkedList<T> {
         numberOfNodes += 1;
     }
 
+    public void remove(T value) {
+        if (isEmpty()) return;
+
+        // in case the element to be removed is head.
+        if (head.getData().equals(value)) {
+            removeHead();
+        }
+        // in case the element to be removed is not head.
+        else {
+            OneWayNode<T> previous = head, temp = head.getNext();
+
+            while (temp != null) {
+                // in case the list contains such an element
+                if (temp.getData().equals(value)) {
+                    previous.setNext(temp.getNext());
+
+                    // in case the element is the tail of the list
+                    if (temp == tail) {
+                        tail = previous;
+                    }
+
+                    numberOfNodes -= 1;
+                    return;
+                }
+
+                previous = temp;
+                temp = temp.getNext();
+            }
+        }
+    }
+
+    public void remove(int position) {
+        if (position < 0 || numberOfNodes <= position) throw new IndexOutOfBoundsException();
+
+        // in case the element to be removed is head.
+        if (position == 0) {
+            removeHead();
+        }
+        // in case the element to be removed is not head.
+        else {
+            OneWayNode<T> previous = head, temp = head.getNext();
+
+            for (int i=1; i<position; i++) {
+                previous = temp;
+                temp = temp.getNext();
+            }
+
+            previous.setNext(temp.getNext());
+
+            // in case the element is the tail of the list
+            if (temp == tail) {
+                tail = previous;
+            }
+
+            numberOfNodes -= 1;
+        }
+    }
+
+    private void removeHead() {
+        // removing head when the list has only one element (i.e., head is equal to tail or number of elements is one)
+        if (head == tail) {
+            head = tail = null;
+        }
+        // removing head when the list has more than one element
+        else {
+            head = head.getNext();
+        }
+
+        numberOfNodes -= 1;
+    }
+
     public int indexOf(T value) {
         int i = 0;
         OneWayNode<T> temp = head;
